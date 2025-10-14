@@ -3,6 +3,10 @@ import PictureBlock from "./components/blocks/PictureBlock"
 import TopMenu from "./components/TopMenu"
 import { useState } from 'react'
 import './App.css'
+import WindowOptions from "./components/WindowOptions"
+import ClockBlock from "./components/blocks/ClockBlock"
+import NotesBlock from "./components/blocks/NotesBlock"
+import EmptyBlock from "./components/blocks/EmptyBlock"
 
 
 function area(window: any) {
@@ -33,14 +37,15 @@ function App(){
     }
     
 
-    var workspaceWidth:number = window.screen.width
-    var workspaceHeight:number = window.screen.height
+    var workspaceWidth:number = window.innerWidth
+    var workspaceHeight:number = window.innerHeight - 30
     console.log(workspaceWidth + " " + workspaceHeight)
 
     const [windows, setWindows] = useState([
         {
             id: 1,
-            title: "Picture - 1",
+            type: "picture",
+            title: "Picture",
             src: getRandomPicture(),
             width: workspaceWidth,
             height: workspaceHeight,
@@ -48,8 +53,16 @@ function App(){
             y:0
         }
     ]);
+    const [isOptionsVisible, setIsOptionsVisible] = useState(false);
 
-    const addWindow = () => {
+
+    const switchWindowOptionsVisibility = () => {
+        setIsOptionsVisible((prev) => (!prev))
+    }
+
+    const addWindow = (type: string) => {
+
+        setIsOptionsVisible(false)
 
         const findBiggestWindow = () => {
             let currentBiggestWindow = windows[0]
@@ -69,7 +82,8 @@ function App(){
         const newId = windows.length + 1
         var newWindow = {
             id: newId,
-            title: `Picture - ${newId}`,
+            type,
+            title: `${type.toLocaleUpperCase()}`,
             src: getRandomPicture(),
             width: workspaceWidth,
             height: workspaceHeight,
@@ -77,33 +91,17 @@ function App(){
             y:0
         }
 
-        /*
-        var biggestWindow = findBiggestWindow()
-
-        if (biggestWindow.width > biggestWindow.height){
-            newWindow.width = biggestWindow.width * 0.49
-            newWindow.height = biggestWindow.height
-            biggestWindow.width *= 0.51
-
-            newWindow.x = biggestWindow.x + biggestWindow.width
-            newWindow.y = biggestWindow.y
-
-        } else {
-            newWindow.width = biggestWindow.width
-            newWindow.height *= 0.49
-            biggestWindow.height *= 0.51
-
-            newWindow.y = biggestWindow.y + biggestWindow.height
-            newWindow.x = biggestWindow.x
-        }*/
-
             switch (newWindow.id) {
+                case 1:
+                    newWindow.width = workspaceWidth
+                    newWindow.height = workspaceHeight
+                    break;
                 case 2:
                     windows[0].width /= 2
                     newWindow.width = windows[0].width
                     newWindow.height = windows[0].height
                     newWindow.x = windows[0].width
-                    newWindow.y = windows[0].x
+                    newWindow.y = windows[0].y
                     break;
                 case 3:
                     windows[0].height /= 2
@@ -157,12 +155,16 @@ function App(){
 
     return (
         <div className="app">
-            <TopMenu onAddWindow={addWindow}></TopMenu>
+            <TopMenu switchWindowOptionsVisibility={switchWindowOptionsVisibility} />
+            <WindowOptions onAddWindow={addWindow} isVisible={isOptionsVisible}/>
             <div className="windows-container">
                 {
                     windows.map((w) => (
-                        <WindowWrapper key={w.id} title={"Picture - " + w.id} width={w.width} height={w.height} x={w.x} y={w.y}>
-                            <PictureBlock src={w.src}></PictureBlock>
+                        <WindowWrapper key={w.id} title={w.type} width={w.width} height={w.height} x={w.x} y={w.y}>
+                            {w.type === "picture" && <PictureBlock src={w.src} />}
+                            {w.type === "notes" && <NotesBlock/>}
+                            {w.type === "clock" && <ClockBlock/>}
+                            {w.type === "empty" && <EmptyBlock/>}
                         </WindowWrapper>
                     ))
                 }

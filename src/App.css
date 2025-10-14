@@ -2,22 +2,34 @@
     --main-theme-color: #E5B7ED;
     --main-theme-background-color: #1f1f1f;
     --red: #e12424;
+    --border: 2px solid black;
+    --block-height: height: calc(100% - 55px);
 }
 
-* {
+*, *::before, *::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
 body {
     font-family: Consolas, Verdana, Geneva, Tahoma, sans-serif;
-    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
 }
 
 .windows-container {
     position: relative; 
-    width: 100%;
-    height: fit-content;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .top-menu {
@@ -39,23 +51,53 @@ body {
     border: none;
 }
 
+.window-options {
+    position: fixed;
+    right: 0;
+    display: block;
+    background-color: white;
+    border: var(--border);
+    z-index: 100;
+    width: 350px;
+    opacity: 1;
+    transition: opacity 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.options-grid button {
+    border: 1px solid black;
+    border-radius: 0;
+    padding: 15px 35px;
+}
+
+.options-grid button:hover {
+    background-color: #E5B7ED;
+}
+
+.menu-description {
+    padding: 10px;
+}
+
 .window {
     width: 450px;
     background-color: var(--main-theme-color);
     display: block;
     position: absolute;
-    border: 2px solid black;
+    border: 1px solid black;
     
 }
 
 .window-header {
     display: flex;
-    
     justify-content: space-between;
     align-items: center;
     background-color: var(--main-theme-color);
     padding: 5px 8px;
-    border-bottom: 2px solid black;
+    border-bottom: var(--border);
 }
 
 .window-title {
@@ -69,7 +111,7 @@ body {
 }
 
 .window-close {
-    border: 2px solid black;
+    border: var(--border);
     border-radius: 0%;
     background: transparent;
     font-size: 18px;
@@ -89,12 +131,59 @@ body {
 }
 
 .picture-block {
-    width: calc(100% - 10px);
-    height: calc(100% - 65px);
+    width: 100%;
+    height: calc(100% - 55px);
     object-fit: cover;
     position: relative;
-    border: 2px solid black;
+    border: var(--border);
     box-sizing: border-box;
     
 }
 
+.clock-container {
+    width: 100%;
+    height: calc(100% - 55px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://cdn.wallpapersafari.com/37/96/thwpNs.png);
+    background-size: cover;
+    border: var(--border);
+}
+
+.time {
+    color: white;
+    text-shadow: 1px 1px 10px blueviolet;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 150px;
+}
+
+.notebook-textarea {
+    width: 100%;
+    height: calc(100% - 55px);
+    border: var(--border);
+    padding: 10px;
+    font-size: x-large;
+
+    background-image: url(https://images.unsplash.com/photo-1629196914168-3a2652305f9f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHVycGxlJTIwcGFwZXJ8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000);
+    background-size: cover;
+}
+
+.notebook-accessory {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 150px;
+}
+
+.empty {
+    width: 100%;
+    height: calc(100% - 55px);
+    border: var(--border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}

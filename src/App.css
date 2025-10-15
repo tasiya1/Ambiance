@@ -140,6 +140,35 @@ body {
     
 }
 
+.picture-src-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.set-picture-button {
+    padding: 10px;
+    font-size: large;
+    border: 10px dotted var(--main-theme-color);
+    border-radius: 5px;
+    outline: none;
+}
+
+.set-picture-button:hover {
+    border-color: var(--main-theme-color);
+    color: whitesmoke;
+    background-color: var(--main-theme-background-color);
+}
+
+.picture-src-url {
+    width: 80%;
+    padding: 10px;
+    font-size: large;
+    border: 10px dotted var(--main-theme-color);
+    border-radius: 5px;
+    outline: none;
+}
+
 .clock-container {
     width: 100%;
     height: calc(100% - 55px);

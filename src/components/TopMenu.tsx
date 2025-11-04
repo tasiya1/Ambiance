@@ -1,12 +1,17 @@
 type TopMenuProps = {
-    switchWindowOptionsVisibility: () => void
+    switchMenuVisibility: (menuId: string) => void
 }
 
-function TopMenu ({switchWindowOptionsVisibility} : TopMenuProps){
+function TopMenu ({switchMenuVisibility} : TopMenuProps){
     return (
         <div className="top-menu">
-            Ambiance for crafting
-            <button className="add-window" onClick={switchWindowOptionsVisibility}>+</button>
+            <span>Ambiance for crafting</span>
+            <div>
+                <button className="top-menu-button" onClick={() => switchMenuVisibility("add-window")}>+</button>
+                <button className="top-menu-button" onClick={() => switchMenuVisibility("settings")}>⚙</button>
+                <button className="top-menu-button" onClick={() => switchMenuVisibility("file-menu")}>⋮</button>
+            </div>
+            
         </div>
     )
 }

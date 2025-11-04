@@ -7,6 +7,8 @@ import WindowOptions from "./components/WindowOptions"
 import ClockBlock from "./components/blocks/ClockBlock"
 import NotesBlock from "./components/blocks/NotesBlock"
 import EmptyBlock from "./components/blocks/EmptyBlock"
+import SettingsWindow from "./components/SettingsWindow"
+import FileMenu from "./components/FileMenu"
 
 
 function area(window: any) {
@@ -30,16 +32,14 @@ function App(){
             y:0
         }
     ]);
-    const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+    const [visibleMenu, setVisibleMenu] = useState<string|null>(null);
 
 
-    const switchWindowOptionsVisibility = () => {
-        setIsOptionsVisible((prev) => (!prev))
+    const switchMenuVisibility = (menuId: string) => {
+        setVisibleMenu((prev) => (prev === menuId ? null : menuId))
     }
 
     const addWindow = (type: string) => {
-
-        setIsOptionsVisible(false)
 
         const findBiggestWindow = () => {
             let currentBiggestWindow = windows[0]
@@ -126,14 +126,16 @@ function App(){
                     break;
             }
 
+        switchMenuVisibility("add-window")
         setWindows([...windows, newWindow])
     }
 
-
     return (
         <div className="app">
-            <TopMenu switchWindowOptionsVisibility={switchWindowOptionsVisibility} />
-            <WindowOptions onAddWindow={addWindow} isVisible={isOptionsVisible}/>
+            <TopMenu switchMenuVisibility={switchMenuVisibility}/>
+            {visibleMenu === "add-window" && <WindowOptions onAddWindow={addWindow}/>}
+            {visibleMenu === "settings" && <SettingsWindow/>}
+            {visibleMenu === "file-menu" && <FileMenu/>}
             <div className="windows-container">
                 {
                     windows.map((w) => (

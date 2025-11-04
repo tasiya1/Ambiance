@@ -2,7 +2,9 @@
     --main-theme-color: #E5B7ED;
     --main-theme-background-color: #1f1f1f;
     --red: #e12424;
+    --pressed-red: #bd1515;
     --border: 2px solid black;
+    --inner-border: 1px solid black;
     --block-height: height: calc(100% - 55px);
 }
 
@@ -15,6 +17,10 @@
 html, body {
     width: 100%;
     height: 100%;
+}
+
+button:focus, textarea:focus {
+    outline: none;
 }
 
 body {
@@ -43,7 +49,7 @@ body {
     color: whitesmoke;
 }
 
-.add-window {
+.top-menu-button {
     font-size: 12px;
     color: whitesmoke;
     cursor: pointer;
@@ -56,7 +62,7 @@ body {
     right: 0;
     display: block;
     background-color: white;
-    border: var(--border);
+    border: var(--inner-border);
     z-index: 100;
     width: 350px;
     opacity: 1;
@@ -69,13 +75,9 @@ body {
 }
 
 .options-grid button {
-    border: 1px solid black;
+    border: var(--inner-border);
     border-radius: 0;
     padding: 15px 35px;
-}
-
-.options-grid button:hover {
-    background-color: #E5B7ED;
 }
 
 .menu-description {
@@ -88,7 +90,7 @@ body {
     display: block;
     position: absolute;
     border: 1px solid black;
-    
+
 }
 
 .window-header {
@@ -128,6 +130,11 @@ body {
     background-color: var(--red);
     border-color: black;
     color: white;
+}
+
+.window-close:active {
+    background-color: var(--pressed-red);
+    color: cornsilk;
 }
 
 .picture-block {
@@ -215,4 +222,72 @@ body {
     justify-content: center;
     align-items: center;
     background-color: white;
+}
+
+.settings-window {
+    width: 60%;
+    height: 60%;
+    position: fixed;
+    top: 15%;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    z-index: 101;
+    background: white;
+    border: var(--inner-border);
+}
+
+.settings-tabs {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    border: var(--inner-border);
+}
+
+.settings-tabs button {
+    border-bottom: var(--border);
+    border-radius: 0;
+    background-color: white;
+}
+
+.settings-content {
+    width: 100%;
+    border: var(--inner-border);
+}
+
+@keyframes slush {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.file-menu {
+    position: fixed;
+    z-index: 101;
+    right: 10px;
+}
+
+.menu-list {
+    display: flex;
+    flex-direction: column;
+    border: var(--inner-border);
+}
+
+.menu-button {
+    border: var(--inner-border);
+    border-radius: 0px;
+}
+
+.settings-tabs button:hover, .options-grid button:hover, .menu-button:hover {
+    background: #ff002f;
+    background: radial-gradient(circle,rgba(255, 0, 47, 1) 0%, rgba(119, 170, 206, 1) 70%, rgba(200, 255, 0, 1) 89%, rgba(243, 252, 70, 1) 100%);
+    background-size: 400% 400%;
+    animation: slush 4s ease infinite;
+    color: whitesmoke;
 }

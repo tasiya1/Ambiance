@@ -291,3 +291,65 @@ body {
     animation: slush 4s ease infinite;
     color: whitesmoke;
 }
+
+.todo-list {
+    border: var(--border);
+    padding: 5px;
+    height: calc(100% - 55px);
+    width: 100%;
+    overflow-y: scroll;
+    background-image: url(https://i.pinimg.com/736x/24/ce/20/24ce20015e788d39c0006d219c9c4dbe.jpg);
+    font-size: 18pt;
+    font-weight: bold;
+}
+
+.todo-item {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin: 5px;
+}
+
+.empty-todo-area {
+    width: 100%;
+    height: 25px;
+    cursor: pointer;
+}
+
+.checkbox {
+    border: 2px solid var(--main-theme-background-color);
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.todo-content {
+    margin-left: 10px;
+    outline: none;
+}
+
+.checked {
+    text-decoration: line-through;
+    color: #1f1f1f55;
+    animation: 0.5s checkmark-happy alternate-reverse ease-in;
+    background: linear-gradient(90deg,rgba(255, 255, 255, 0) 0%, rgba(235, 241, 247, 0.38) 56%, rgb(183, 111, 212) 57%, rgba(255, 255, 255, 0) 61%);
+    background-position: -100% 0%;
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+}
+
+@keyframes checkmark-happy {
+    from {
+        background-position: -100% 0%;
+    }
+
+    to {
+        background-position: 100% 0%;
+    }
+}

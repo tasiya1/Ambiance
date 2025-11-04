@@ -9,6 +9,7 @@ import NotesBlock from "./components/blocks/NotesBlock"
 import EmptyBlock from "./components/blocks/EmptyBlock"
 import SettingsWindow from "./components/SettingsWindow"
 import FileMenu from "./components/FileMenu"
+import ToDoListBlock from "./components/blocks/ToDoListBlock"
 
 
 function area(window: any) {
@@ -23,8 +24,8 @@ function App(){
     const [windows, setWindows] = useState([
         {
             id: 1,
-            type: "picture",
-            title: "Picture",
+            type: "todo-list",
+            title: "todo-list",
             src: "",
             width: workspaceWidth,
             height: workspaceHeight,
@@ -143,6 +144,7 @@ function App(){
                             {w.type === "picture" && <PictureBlock/>}
                             {w.type === "notes" && <NotesBlock/>}
                             {w.type === "clock" && <ClockBlock/>}
+                            {w.type === "todo-list" && <ToDoListBlock/>}
                             {w.type === "empty" && <EmptyBlock/>}
                         </WindowWrapper>
                     ))

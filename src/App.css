@@ -304,7 +304,7 @@ body {
 }
 
 .todo-item {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     margin: 5px;

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 type TopMenuProps = {
     switchMenuVisibility: (menuId: string) => void
 }
@@ -10,6 +12,7 @@ function TopMenu ({switchMenuVisibility} : TopMenuProps){
                 <button className="top-menu-button" onClick={() => switchMenuVisibility("add-window")}>+</button>
                 <button className="top-menu-button" onClick={() => switchMenuVisibility("settings")}>⚙</button>
                 <button className="top-menu-button" onClick={() => switchMenuVisibility("file-menu")}>⋮</button>
+                <Link to="/login">Log in</Link>
             </div>
             
         </div>

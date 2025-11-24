@@ -36,6 +36,11 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 0px;
 }
 
 .top-menu {
@@ -85,12 +90,9 @@ body {
 }
 
 .window {
-    width: 450px;
     background-color: var(--main-theme-color);
-    display: block;
-    position: absolute;
     border: 1px solid black;
-
+    transition: 1s width;
 }
 
 .window-header {
@@ -253,6 +255,8 @@ body {
 .settings-content {
     width: 100%;
     border: var(--inner-border);
+    padding: 5px 10px;
+    overflow-y: scroll;
 }
 
 @keyframes slush {
@@ -297,7 +301,7 @@ body {
     padding: 5px;
     height: calc(100% - 55px);
     width: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-image: url(https://i.pinimg.com/736x/24/ce/20/24ce20015e788d39c0006d219c9c4dbe.jpg);
     font-size: 18pt;
     font-weight: bold;
@@ -352,4 +356,32 @@ body {
     to {
         background-position: 100% 0%;
     }
+}
+
+.themes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+}
+
+.theme-button {
+    margin: 2px;
+    height: 70px;
+    padding: 5px 5px 5px 20px;
+    border: var(--border);
+    border-radius: 5px;
+    transition: 0.5s;
+    cursor: pointer;
+    background-position: center;
+    color: whitesmoke;
+    font-weight: bold;
+    text-shadow: 0px 0px 5px #1f1f1f;
+}
+
+.theme-button:hover {
+    transform: translateX(5px)
+}
+
+.theme-button:active {
+    transform: translate(5px, -5px);
 }

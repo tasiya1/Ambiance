@@ -25,12 +25,12 @@ function AmbiancePage(){
         {
             id: 1,
             type: "todo-list",
-            title: "todo-list",
+            title: `todo-list`,
             src: "",
-            width: workspaceWidth,
-            height: workspaceHeight,
-            x:0,
-            y:0
+            colStart: 1,
+            colSpan: 8,
+            rowStart: 1,
+            rowSpan: 7
         }
     ]);
     const [visibleMenu, setVisibleMenu] = useState<string|null>(null);
@@ -42,20 +42,7 @@ function AmbiancePage(){
 
     const addWindow = (type: string) => {
 
-        const findBiggestWindow = () => {
-            let currentBiggestWindow = windows[0]
-            let secondBiggestWindow = windows[windows.length - 1]
-            for(let i = 0; i < windows.length; i++) {
-                if (area(windows[i]) > area(currentBiggestWindow)) {
-                    secondBiggestWindow = currentBiggestWindow
-                    currentBiggestWindow = windows[i]
-                } else if (area(windows[i]) > area(secondBiggestWindow) && area(windows[i]) < area(currentBiggestWindow)) {
-                    secondBiggestWindow = windows[i]
-                }
-            }
-            return secondBiggestWindow
-        }
-        if (windows.length > 7) return
+        if (windows.length > 6) return
         
         const newId = windows.length + 1
         var newWindow = {
@@ -63,69 +50,100 @@ function AmbiancePage(){
             type,
             title: `${type.toLocaleUpperCase()}`,
             src: "",
-            width: workspaceWidth,
-            height: workspaceHeight,
-            x:0,
-            y:0
+            colStart: 1,
+            colSpan: 4,
+            rowStart: 1,
+            rowSpan: 7
         }
 
-            switch (newWindow.id) {
-                case 1:
-                    newWindow.width = workspaceWidth
-                    newWindow.height = workspaceHeight
-                    break;
-                case 2:
-                    windows[0].width /= 2
-                    newWindow.width = windows[0].width
-                    newWindow.height = windows[0].height
-                    newWindow.x = windows[0].width
-                    newWindow.y = windows[0].y
-                    break;
-                case 3:
-                    windows[0].height /= 2
-                    newWindow.width = windows[0].width
-                    newWindow.height = windows[0].height
-                    newWindow.x = windows[0].x
-                    newWindow.y = windows[0].height
-                    break;
-                
-                case 4:
-                    windows[2].width /= 2
-                    newWindow.width = windows[2].width
-                    newWindow.height = windows[2].height
-                    newWindow.x = windows[2].width
-                    newWindow.y = windows[0].height
-                    break;
+        switch (newWindow.id) {
 
-                case 5:
-                    windows[1].height /= 2
-                    newWindow.width = windows[1].width
-                    newWindow.height = windows[1].height
-                    newWindow.x = windows[1].x
-                    newWindow.y = windows[1].height
-                    break;
-                default:
-                    var biggestWindow = findBiggestWindow()
+            case 1:
+                Object.assign(newWindow, {
+                    colStart: 1,
+                    colSpan: 4,
+                    rowStart: 1,
+                    rowSpan: 7
+                });
+                break;
 
-                    if (biggestWindow.width > biggestWindow.height){
-                        newWindow.width = biggestWindow.width / 2
-                        newWindow.height = biggestWindow.height
-                        biggestWindow.width /= 2
+            case 2:
+                Object.assign(windows[0], {
+                    colSpan: 4,
+                    rowSpan: 7
+                });
 
-                        newWindow.x = biggestWindow.x + biggestWindow.width
-                        newWindow.y = biggestWindow.y
+                Object.assign(newWindow, {
+                    colStart: 5,
+                    colSpan: 4,
+                    rowStart: 1,
+                    rowSpan: 7
+                });
+                break;
 
-                    } else {
-                        newWindow.width = biggestWindow.width
-                        biggestWindow.height /= 2
-                        newWindow.height = biggestWindow.height
-                        
+            case 3:
+                Object.assign(windows[1], {
+                    rowSpan: 3
+                });
 
-                        newWindow.y = biggestWindow.y + biggestWindow.height
-                        newWindow.x = biggestWindow.x
-                    }
-                    break;
-            }
+                Object.assign(newWindow, {
+                    colStart: 5,
+                    colSpan: 4,
+                    rowStart: 4,
+                    rowSpan: 4
+                });
+                break;
+
+            case 4:
+                Object.assign(windows[2], {
+                    colStart: 7,
+                    colSpan: 2
+                });
+            
+                Object.assign(newWindow, {
+                    colStart: 5,
+                    colSpan: 2,
+                    rowStart: 4,
+                    rowSpan: 4
+                });
+                break;
+
+            case 5:
+                Object.assign(windows[2], {
+                    rowSpan: 2
+                });
+
+                Object.assign(newWindow, {
+                    colStart: 7,
+                    colSpan: 2,
+                    rowStart: 6,
+                    rowSpan: 2
+                });
+                break;
+
+            case 6:
+                Object.assign(windows[4], {
+                    colSpan: 1
+                });
+            
+                Object.assign(newWindow, {
+                    colStart: 8,
+                    colSpan: 1,
+                    rowStart: 6,
+                    rowSpan: 2
+                });
+                break;
+
+            default:
+                // Якщо додаються нові айді — ставимо їх у нижню частину сітки
+                Object.assign(newWindow, {
+                    colStart: 1,
+                    colSpan: 2,
+                    rowStart: 1,
+                    rowSpan: 2
+                });
+                break;
+        }
 
         switchMenuVisibility("add-window")
         setWindows([...windows, newWindow])
@@ -140,7 +158,8 @@ function AmbiancePage(){
             <div className="windows-container">
                 {
                     windows.map((w) => (
-                        <WindowWrapper key={w.id} title={w.type} width={w.width} height={w.height} x={w.x} y={w.y}>
+                        <WindowWrapper key={w.id} title={w.type} colStart={w.colStart} colSpan={w.colSpan} rowStart={w.rowStart} rowSpan={w.rowSpan}>
+
                             {w.type === "picture" && <PictureBlock/>}
                             {w.type === "notes" && <NotesBlock/>}
                             {w.type === "clock" && <ClockBlock/>}

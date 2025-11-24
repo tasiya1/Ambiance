@@ -1,17 +1,17 @@
 import type { ReactNode } from "react"
 
 interface WindowWrapperProps {
-  title?: string
-  children?: ReactNode
-  width?: number
-  height?: number
-  x?: number
-  y?: number
+    title: string
+    colStart: number
+    colSpan: number
+    rowStart: number
+    rowSpan: number
+    children?: React.ReactNode
 }
 
-function WindowWrapper ({title = "Window", children, width, height, x, y} : WindowWrapperProps) {
+function WindowWrapper ({title, colStart, colSpan, rowStart, rowSpan, children} : WindowWrapperProps) {
   return (
-    <div className="window" style={{width: width, height: height, top: y, left: x}}>
+    <div className="window" style={{gridColumn: `${colStart} / span ${colSpan}`, gridRow: `${rowStart} / span ${rowSpan}`}}>
         <div className="window-header">
             <span className="window-title">{title}</span>
             <button className="window-close">✖</button>

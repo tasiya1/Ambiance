@@ -13,9 +13,65 @@ import ToDoListBlock from "../src/components/blocks/ToDoListBlock"
 import ChibbiDibbey from "../src/components/blocks/ChibbiDibbey"
 import { applyTheme, themes, type ThemeName } from "../src/assets/Themes"
 
+export type Window = {
+            id: number,
+            type: string,
+            title: string,
+            src: string,
+            colStart: number,
+            colSpan: number,
+            rowStart: number,
+            rowSpan: number
+}
 
-function area(window: any) {
-    return window.width * window.height
+export function setWindowLayout(windows: Window[]){
+    const windowLayout: Window[] = JSON.parse(JSON.stringify(windows))
+    const l: number = windowLayout.length
+    switch (l) {
+
+        case 1:
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 8, rowStart: 1, rowSpan: 7 });
+            break;
+
+        case 2:
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            Object.assign(windowLayout[1], { colStart: 5, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            break;
+
+        case 3:
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            Object.assign(windowLayout[1], { colStart: 5, colSpan: 4, rowStart: 1, rowSpan: 3 });
+            Object.assign(windowLayout[2], { colStart: 5, colSpan: 4, rowStart: 4, rowSpan: 4 });
+            break;
+
+        case 4:
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            Object.assign(windowLayout[1], { colStart: 5, colSpan: 4, rowStart: 1, rowSpan: 3 });
+            Object.assign(windowLayout[2], { colStart: 5, colSpan: 2, rowStart: 4, rowSpan: 4 });
+            Object.assign(windowLayout[3], { colStart: 7, colSpan: 2, rowStart: 4, rowSpan: 4 });
+            break;
+
+        case 5:
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            Object.assign(windowLayout[1], { colStart: 5, colSpan: 4, rowStart: 1, rowSpan: 3 });
+            Object.assign(windowLayout[2], { colStart: 5, colSpan: 2, rowStart: 4, rowSpan: 4 });
+            Object.assign(windowLayout[3], { colStart: 7, colSpan: 2, rowStart: 4, rowSpan: 2 });
+            Object.assign(windowLayout[4], { colStart: 7, colSpan: 2, rowStart: 6, rowSpan: 2 });
+            break;
+
+        case 6: 
+            Object.assign(windowLayout[0], { colStart: 1, colSpan: 4, rowStart: 1, rowSpan: 7 });
+            Object.assign(windowLayout[1], { colStart: 5, colSpan: 4, rowStart: 1, rowSpan: 3 });
+            Object.assign(windowLayout[2], { colStart: 5, colSpan: 2, rowStart: 4, rowSpan: 4 });
+            Object.assign(windowLayout[3], { colStart: 7, colSpan: 2, rowStart: 4, rowSpan: 2 });
+            Object.assign(windowLayout[4], { colStart: 7, colSpan: 1, rowStart: 6, rowSpan: 2 });
+            Object.assign(windowLayout[5], { colStart: 8, colSpan: 1, rowStart: 6, rowSpan: 2 });
+            break;
+
+        default:
+            // Поки не ставити
+    }
+    return windowLayout
 }
 
 function AmbiancePage(){
@@ -40,6 +96,7 @@ function AmbiancePage(){
             rowSpan: 7
         }
     ]);
+
     const [visibleMenu, setVisibleMenu] = useState<string|null>(null);
 
 
@@ -47,10 +104,18 @@ function AmbiancePage(){
         setVisibleMenu((prev) => (prev === menuId ? null : menuId))
     }
 
+    const deleteWindow = (id: number) => {
+        setWindows(prev => {
+            const filteredWindowArray = prev.filter((w => w.id !== id));
+            const newWindowLayout = setWindowLayout(filteredWindowArray)
+            return newWindowLayout
+        })
+    };
+
     const addWindow = (type: string) => {
 
-        if (windows.length > 6) return
-        
+        if (windows.length > 6) return;
+
         const newId = windows.length + 1
         var newWindow = {
             id: newId,
@@ -63,90 +128,11 @@ function AmbiancePage(){
             rowSpan: 7
         }
 
-        switch (newWindow.id) {
-
-            case 1:
-                Object.assign(newWindow, {
-                    colStart: 1,
-                    colSpan: 4,
-                    rowStart: 1,
-                    rowSpan: 7
-                });
-                break;
-
-            case 2:
-                Object.assign(windows[0], {
-                    colSpan: 4,
-                    rowSpan: 7
-                });
-
-                Object.assign(newWindow, {
-                    colStart: 5,
-                    colSpan: 4,
-                    rowStart: 1,
-                    rowSpan: 7
-                });
-                break;
-
-            case 3:
-                Object.assign(windows[1], {
-                    rowSpan: 3
-                });
-
-                Object.assign(newWindow, {
-                    colStart: 5,
-                    colSpan: 4,
-                    rowStart: 4,
-                    rowSpan: 4
-                });
-                break;
-
-            case 4:
-                Object.assign(windows[2], {
-                    colStart: 7,
-                    colSpan: 2
-                });
-            
-                Object.assign(newWindow, {
-                    colStart: 5,
-                    colSpan: 2,
-                    rowStart: 4,
-                    rowSpan: 4
-                });
-                break;
-
-            case 5:
-                Object.assign(windows[2], {
-                    rowSpan: 2
-                });
-
-                Object.assign(newWindow, {
-                    colStart: 7,
-                    colSpan: 2,
-                    rowStart: 6,
-                    rowSpan: 2
-                });
-                break;
-
-            case 6:
-                Object.assign(windows[4], {
-                    colSpan: 1
-                });
-            
-                Object.assign(newWindow, {
-                    colStart: 8,
-                    colSpan: 1,
-                    rowStart: 6,
-                    rowSpan: 2
-                });
-                break;
-
-            default:
-                // Поки не ставити
-        }
-
         switchMenuVisibility("add-window")
-        setWindows([...windows, newWindow])
+        setWindows(prev => {
+            const updatedWindowArray = [...prev, newWindow]
+            return setWindowLayout(updatedWindowArray)
+        })
     }
 
     return (
@@ -158,7 +144,7 @@ function AmbiancePage(){
             <div className="windows-container">
                 {
                     windows.map((w) => (
-                        <WindowWrapper key={w.id} title={w.type} colStart={w.colStart} colSpan={w.colSpan} rowStart={w.rowStart} rowSpan={w.rowSpan}>
+                        <WindowWrapper key={w.id} id={w.id} title={w.type} colStart={w.colStart} colSpan={w.colSpan} rowStart={w.rowStart} rowSpan={w.rowSpan} onDelete={() => {deleteWindow(w.id)}}>
 
                             {w.type === "picture" && <PictureBlock/>}
                             {w.type === "notes" && <NotesBlock/>}

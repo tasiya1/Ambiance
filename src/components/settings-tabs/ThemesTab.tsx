@@ -3,6 +3,7 @@ import { applyTheme } from "../../assets/Themes"
 function ThemesTab() {
     return (<>
         <h3>Select theme</h3>
+        <h4>Background themes</h4>
         <div className="themes-container">
             <div className="theme-button" onClick={() => {applyTheme("lilac")}} style={{backgroundImage: "url(https://i.pinimg.com/originals/bc/d7/48/bcd74849e39b7b5c0e43897a79d8fbe0.gif)"}}>Lilac(Default)</div>
             <div className="theme-button" onClick={() => {applyTheme("frutiger_aero")}} style={{backgroundImage: "url(https://images.steamusercontent.com/ugc/2304216839481601476/8AC055C92427A686CF04CB22A55AB6349ED57557/?imw=512&&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false)"}}>Frutiger Aero</div>
@@ -15,8 +16,14 @@ function ThemesTab() {
             <div className="theme-button" style={{backgroundImage: "url(https://i.pinimg.com/originals/09/75/6d/09756d27dd4144a14a6fac6fd7de5f44.gif)"}}>Kawaii</div>
             <div className="theme-button" style={{backgroundImage: "url(https://media.tenor.com/4PUlE7swo54AAAAM/sea-sunset.gif)"}}>Sunset</div>
             <div className="theme-button" onClick={() => {applyTheme("typewriter")}} style={{backgroundImage: "url(https://www.theruglady.com.au/cdn/shop/files/SER-YURI-BEIGEPortrait.png?v=1688359878)"}}>Typewriter</div>
-            <div className="theme-button" style={{backgroundImage: "url()"}}></div>
-        </div>
+        </div>   
+            <hr className="divider"></hr>
+            <h4>Material themes</h4>
+            <div className="themes-container">
+                <div className="theme-button" onClick={() => {applyTheme("soft_white")}} style={{backgroundColor: "#fff"}}>Soft light</div>
+                <div className="theme-button" onClick={() => {applyTheme("soft_black")}} style={{backgroundColor: "#000"}}>Soft dark</div>
+            </div>
+        
     </>)
 }
 

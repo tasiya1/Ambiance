@@ -12,6 +12,10 @@
     --inner-border: 1px solid black;
     --block-height: height: calc(100% - 55px);
     --chibbidibbey-appearance: url(https://i.pinimg.com/originals/21/db/d3/21dbd346a371c5bceffd6d61e491c3b0.gif);
+    --windows-gap: 0px;
+    --content-border-radius: 5px;
+    --box-shadow: none;
+    --window-container-background: #fff;
 }
 
 *, *::before, *::after {
@@ -41,13 +45,14 @@ body {
 .windows-container {
     position: relative; 
     width: 100vw;
-    height: 100vh;
+    height: calc(100vh - 30px);
     overflow: hidden;
 
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: repeat(7, 1fr);
-    gap: 0px;
+    gap: var(--windows-gap);
+    background: var(--window-container-background);
 }
 
 .top-menu {
@@ -58,15 +63,17 @@ body {
     justify-content: space-between;
     background-color: var(--main-theme-background-color);
     position: relative;
-    color: whitesmoke;
+    color: var(--font-color);
+    padding: 10px;
 }
 
 .top-menu-button {
     font-size: 12px;
-    color: whitesmoke;
+    color: var(--font-color);
     cursor: pointer;
     background: none;
     border: none;
+    font-weight: 900;
 }
 
 .window-options {
@@ -98,9 +105,11 @@ body {
 
 .window {
     background-color: var(--main-theme-color);
-    border: 1px solid black;
+    border: var(--inner-border);
     transition: 1s width;
     color: var(--font-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--content-border-radius);
 }
 
 .window-header {
@@ -110,6 +119,7 @@ body {
     background-color: var(--main-theme-color);
     padding: 5px 8px;
     border-bottom: var(--border);
+    border-radius: var(--content-border-radius);
 }
 
 .window-title {
@@ -124,14 +134,14 @@ body {
 
 .window-close {
     border: var(--border);
-    border-radius: 0%;
+    border-radius: var(--content-border-radius);
     background: transparent;
     font-size: 18px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    color: black;
+    color: var(--font-color);
     width: 40px;
     height: 40px;
 }
@@ -153,6 +163,7 @@ body {
     object-fit: cover;
     position: relative;
     border: var(--border);
+    border-radius: var(--content-border-radius);
     box-sizing: border-box;
     
 }
@@ -192,9 +203,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: var(--clock-bg-image);
+    background: var(--clock-bg-image);
     background-size: cover;
+    background-position: center;
     border: var(--border);
+    border-radius: var(--content-border-radius);
 }
 
 .time {
@@ -210,10 +223,11 @@ body {
     width: 100%;
     height: calc(100% - 55px);
     border: var(--border);
+    border-radius: var(--content-border-radius);
     padding: 10px;
     font-size: x-large;
     color: var(--font-color);
-    background-image: var(--notebook-bg-image);
+    background: var(--notebook-bg-image);
     background-size: cover;
 }
 
@@ -228,10 +242,11 @@ body {
     width: 100%;
     height: calc(100% - 55px);
     border: var(--border);
+    border-radius: var(--content-border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: var(--window-container-background);
 }
 
 .settings-window {
@@ -245,6 +260,7 @@ body {
     z-index: 101;
     background: white;
     border: var(--inner-border);
+    border-radius: var(--content-border-radius);
 }
 
 .settings-tabs {
@@ -252,6 +268,7 @@ body {
     display: flex;
     flex-direction: column;
     border: var(--inner-border);
+    border-radius: var(--content-border-radius);
 }
 
 .settings-tabs button {
@@ -289,11 +306,11 @@ body {
     display: flex;
     flex-direction: column;
     border: var(--inner-border);
+    border-radius: var(--content-border-radius);
 }
 
 .menu-button {
     border: var(--inner-border);
-    border-radius: 0px;
 }
 
 .settings-tabs button:hover, .options-grid button:hover, .menu-button:hover {
@@ -306,13 +323,14 @@ body {
 
 .todo-list {
     border: var(--border);
+    border-radius: var(--content-border-radius);
     padding: 5px;
     height: calc(100% - 55px);
     width: 100%;
     overflow-y: auto;
-    background-image: var(--todo-list-bg-image);
+    background: var(--todo-list-bg-image);
     font-size: 18pt;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 .todo-item {
@@ -329,7 +347,7 @@ body {
 }
 
 .checkbox {
-    border: 2px solid var(--main-theme-background-color);
+    border: 2px solid var(--font-color);
     border-radius: 5px;
     width: 30px;
     height: 30px;
@@ -369,7 +387,7 @@ body {
 .themes-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    /*grid-template-rows: repeat(5, 1fr);*/
 }
 
 .theme-button {
@@ -384,6 +402,7 @@ body {
     color: whitesmoke;
     font-weight: bold;
     text-shadow: 0px 0px 5px #1f1f1f;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
 }
 
 .theme-button:hover {
@@ -395,21 +414,32 @@ body {
 }
 
 .chibbidibbey-window {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    container-type: size;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap:  wrap;
+    justify-content: center;
+    overflow: auto;
 }
 
 .chibbidibbey-appearance {
     background-image: var(--chibbidibbey-appearance);
-    height: 90%;
+    min-height: 100px;
+    min-width: 100px;
+    height: 150px;
+    width: 150px;
+    max-height: 500px;
+    max-width: 500px;
     background-size: contain;
     background-repeat: no-repeat;
+    margin: 10px;
 }
 
 .chibbidibbey-button {
-    width: 100px;
-    height: 50px;
+
     background-color: var(--accent-color);
     color: var(--font-color);
     border-radius: 5px;
@@ -422,17 +452,27 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    width: 50%;
+    max-width: max-content;
+    min-width: min-content;
     text-align: center;
+    column-gap: 5px;
     row-gap: 5px;
-    line-height: 50px;
+    line-height: 30px;
     vertical-align: middle;
 }
 
+.chibbidibbey-stats > * {
+    flex-shrink: 2;
+}
+
 .chibbidibbey-stats input {
-    width: 100px;
+    width: 70px;
     height: 30px;
     outline: none;
+    background: var(--main-theme-background-color);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 .sparkle {
@@ -442,6 +482,24 @@ body {
     font-size: 20px;
     animation: sparkle 1.2s ease-out forwards;
     transform-origin: center;
+}
+
+.flying-burger {
+    position: fixed;
+    z-index: 21;
+    pointer-events: none;
+    width: 700px;
+    animation: flying-burger-left 0.4s ease-in forwards;
+}
+
+@keyframes flying-burger-left {
+    0% { transform: translate(0, 0) scale(1); }
+    100% {  transform: translate(-200px, -200px) scale(0.3); }
+}
+
+@keyframes flying-burger-up {
+    0% { transform: translate(0, 0) scale(1); }
+    100% {  transform: translate(-100px, -300px) scale(0.3); }
 }
 
 @keyframes sparkle {
@@ -460,3 +518,40 @@ body {
 .boredom-sparkle { color: #ffc400}
 .hunger-sparkle { color: #da6f42}
 .happiness-sparkle { color: #ff4fa3; font-size: 30px;}
+
+.divider {
+    margin: 10px;
+}
+
+@container (min-aspect-ratio: 1/1) {
+    .chibbidibbey-window {
+        flex-direction: column;
+    }
+    .flying-burger{
+        animation: flying-burger-up 0.4s ease-in forwards;
+    }
+}
+
+@container (max-aspect-ratio: 1/1) {
+    .chibbidibbey-window {
+        flex-direction: row;
+    }
+    .flying-burger{
+        animation: flying-burger-left 0.4s ease-in forwards;
+    }
+}
+
+.highlight {
+    animation: highlight-it 0.3s ease-in alternate-reverse;
+}
+
+@keyframes highlight-it {
+    0% {
+        transform: scale(1);
+        text-shadow: 0px 0px 2px 0px var(--accent-color);
+    }
+    100% {
+        transform: scale(1.2);
+        text-shadow: 0px 0px 4px 0px var(--accent-color);
+    }
+}

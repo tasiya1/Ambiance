@@ -12,6 +12,7 @@ function WindowOptions ({onAddWindow} : WindowOptionsProps){
                 <button className="window-type-button" onClick={() => onAddWindow("clock")}>Clock</button>
                 <button className="window-type-button" onClick={() => onAddWindow("todo-list")}>To-do list</button>
                 <button className="window-type-button" onClick={() => onAddWindow("empty")}>Empty</button>
+                <button className="window-type-button" onClick={() => onAddWindow("chibbidibbey")}>ChibbiDibbey</button>
             </div>
             
         </div>

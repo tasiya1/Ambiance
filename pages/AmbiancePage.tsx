@@ -1,7 +1,7 @@
 import WindowWrapper from "../src/components/WindowWrapper"
 import PictureBlock from "../src/components/blocks/PictureBlock"
 import TopMenu from "../src/components/TopMenu"
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../src/App.css'
 import WindowOptions from "../src/components/WindowOptions"
 import ClockBlock from "../src/components/blocks/ClockBlock"
@@ -10,6 +10,8 @@ import EmptyBlock from "../src/components/blocks/EmptyBlock"
 import SettingsWindow from "../src/components/SettingsWindow"
 import FileMenu from "../src/components/FileMenu"
 import ToDoListBlock from "../src/components/blocks/ToDoListBlock"
+import ChibbiDibbey from "../src/components/blocks/ChibbiDibbey"
+import { applyTheme, themes, type ThemeName } from "../src/assets/Themes"
 
 
 function area(window: any) {
@@ -20,6 +22,11 @@ function AmbiancePage(){
     var workspaceWidth:number = window.innerWidth
     var workspaceHeight:number = window.innerHeight - 30
     console.log(workspaceWidth + " " + workspaceHeight)
+
+    useEffect(() => {
+        const saved : ThemeName = (localStorage.getItem("theme") || "lilac") as ThemeName;
+        applyTheme(saved);
+    }, []);
 
     const [windows, setWindows] = useState([
         {
@@ -135,14 +142,7 @@ function AmbiancePage(){
                 break;
 
             default:
-                // Якщо додаються нові айді — ставимо їх у нижню частину сітки
-                Object.assign(newWindow, {
-                    colStart: 1,
-                    colSpan: 2,
-                    rowStart: 1,
-                    rowSpan: 2
-                });
-                break;
+                // Поки не ставити
         }
 
         switchMenuVisibility("add-window")
@@ -165,6 +165,7 @@ function AmbiancePage(){
                             {w.type === "clock" && <ClockBlock/>}
                             {w.type === "todo-list" && <ToDoListBlock/>}
                             {w.type === "empty" && <EmptyBlock/>}
+                            {w.type === "chibbidibbey" && <ChibbiDibbey/>}
                         </WindowWrapper>
                     ))
                 }

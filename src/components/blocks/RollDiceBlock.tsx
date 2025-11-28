@@ -15,19 +15,20 @@ function RollDiceBlock() {
     const [isRolling, setIsRolling] = useState(false)
 
     const rollDice = () => {
+        if (isRolling) return
         setIsRolling(true)
 
         const rollInterval = setInterval(() => {
             const randomNumber = getRandomNumber(5); 
             setDice(diceSides[randomNumber])
-        }, 500);
+        }, 200);
             
         setTimeout(() => {
             clearInterval(rollInterval)
         }, 2000);
 
         setTimeout(() => {
-            setIsRolling(false)
+            setIsRolling(false) 
         }, 3000);
     }
 

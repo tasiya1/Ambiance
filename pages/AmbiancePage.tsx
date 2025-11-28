@@ -15,6 +15,7 @@ import { applyTheme, themes, type ThemeName } from "../src/assets/Themes"
 import RandomColorBlock from "../src/components/blocks/RandomColorBlock"
 import IdeasGeneratorBlock from "../src/components/blocks/IdeasGeneratorBlock"
 import RollDiceBlock from "../src/components/blocks/RollDiceBlock"
+import PomodoroTimerBlock from "../src/components/blocks/PomodoroTimerBlock"
 
 export type Window = {
             id: number,
@@ -158,6 +159,7 @@ function AmbiancePage(){
                             {w.type === "random-color" && <RandomColorBlock/>}
                             {w.type === "random-idea" && <IdeasGeneratorBlock/>}
                             {w.type === "roll-dice" && <RollDiceBlock/>}
+                            {w.type === "pomodoro-timer" && <PomodoroTimerBlock/>}
                         </WindowWrapper>
                     ))
                 }

@@ -31,6 +31,7 @@ function WindowOptions ({onAddWindow} : WindowOptionsProps){
                 <button className="window-type-button" onClick={() => onAddWindow("random-color")}>Random color</button>
                 <button className="window-type-button" onClick={() => onAddWindow("random-idea")}>Random idea</button>
                 <button className="window-type-button" onClick={() => onAddWindow("roll-dice")}>Roll a dice</button>
+                <button className="window-type-button" onClick={() => onAddWindow("pomodoro-timer")}>Pomodoro timer</button>
             </div>
             
         </div>

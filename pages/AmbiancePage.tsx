@@ -3,7 +3,7 @@ import PictureBlock from "../src/components/blocks/PictureBlock"
 import TopMenu from "../src/components/TopMenu"
 import { useEffect, useState } from 'react'
 import '../src/App.css'
-import WindowOptions from "../src/components/WindowOptions"
+import WindowOptions, { type WindowType } from "../src/components/WindowOptions"
 import ClockBlock from "../src/components/blocks/ClockBlock"
 import NotesBlock from "../src/components/blocks/NotesBlock"
 import EmptyBlock from "../src/components/blocks/EmptyBlock"
@@ -16,6 +16,8 @@ import RandomColorBlock from "../src/components/blocks/RandomColorBlock"
 import IdeasGeneratorBlock from "../src/components/blocks/IdeasGeneratorBlock"
 import RollDiceBlock from "../src/components/blocks/RollDiceBlock"
 import PomodoroTimerBlock from "../src/components/blocks/PomodoroTimerBlock"
+import FortuneCookieBlock from "../src/components/blocks/FortuneCookieBlock"
+import ToiletPaperBlock from "../src/components/blocks/ToiletPaperBlock"
 
 export type Window = {
             id: number,
@@ -116,7 +118,7 @@ function AmbiancePage(){
         })
     };
 
-    const addWindow = (type: string) => {
+    const addWindow = (type: WindowType) => {
 
         if (windows.length > 6) return;
 
@@ -160,6 +162,8 @@ function AmbiancePage(){
                             {w.type === "random-idea" && <IdeasGeneratorBlock/>}
                             {w.type === "roll-dice" && <RollDiceBlock/>}
                             {w.type === "pomodoro-timer" && <PomodoroTimerBlock/>}
+                            {w.type === "fortune-cookie" && <FortuneCookieBlock/>}
+                            {w.type === "toilet-paper" && <ToiletPaperBlock/>}
                         </WindowWrapper>
                     ))
                 }

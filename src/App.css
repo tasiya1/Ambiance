@@ -651,3 +651,61 @@ body {
     height: fit-content;
     width: fit-content;
 }
+
+.fortune-cookie {
+    width: 100px;
+    height: 100px;
+    background-color: #c0925d;
+}
+
+.fortune-cookie:active {
+    animation: shake 0.3s ease-out infinite alternate-reverse;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(-30deg);
+    }
+    100% {
+        transform: rotate(40deg);
+    }
+}
+
+.toilet-paper-window {
+    position: relative;
+}
+
+.toilet-paper-roll {
+    height: 100px;
+    width: 100px;
+    background: linear-gradient(180deg,#efefef 0%, #e5e5e5 100%);
+    border-radius: 1000px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px outset silver;
+    transition: 0.5s;
+    z-index: 10;
+    position: absolute;
+}
+
+.toilet-paper-carton {
+    height: 50px;
+    width: 50px;
+    background-color: #2c251b;
+    border: 5px inset #866353;
+    border-radius: 50%;
+}
+
+.toilet-paper-running-tail {
+    height: 50%;
+    border: none;
+    background-color: silver;
+    width: 2px;
+    position: absolute;
+    transition: 0.5s;
+    top: 51%;
+}
